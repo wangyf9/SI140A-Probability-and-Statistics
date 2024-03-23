@@ -1,0 +1,381 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%  
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Class
+%   - Due date
+%   - Name
+%   - Student ID
+
+\newcommand{\hmwkTitle}{Homework\ \#14}
+\newcommand{\hmwkClass}{Probability \& Statistics for EECS}
+\newcommand{\hmwkDueDate}{May 21, 2023}
+\newcommand{\hmwkAuthorName}{Wang Yunfei}
+\newcommand{\hmwkAuthorID}{2021533135}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\\  \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 23:59}\\
+	\vspace{4in}
+}
+
+\author{
+	Name: \textbf{\hmwkAuthorName} \\
+	Student ID: \hmwkAuthorID}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[1]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    Assume the indicator r.v. $I_j$ represents "CATCAT" sequence appearing starting from j to j+5, $j\in\{1,\cdots,110\}$.\\
+    Then the total number of the occurence of the expression "CATCAT" is $N=\sum_{j=1}^{110}I_j$.
+    \begin{align*}
+        E[N]&=E[\sum_{j=1}^{110}I_j]\\
+        &=\sum_{j=1}^{110}E[I_j]\\
+        &=\sum_{j=1}^{110}P(I_j=1)\\
+        &=\sum_{j=1}^{110}(p_2p_1p_3p_2p_1p_3)\\
+        &=110(p_1p_2p_3)^2
+    \end{align*}
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+   First because we treat $p_2\sim Unif(0,1)$, then we can get the prior distribution of $p_2$, which is $p_2\sim Beta(1,1)$.\\
+   And then we can use the data $X$ we observed, which is "CAT". \\
+   From the story we have learned about Beta-Binomial conjugacy in the lesson, so we can seem A and T as failures, adding the latter parameter in the prior distribution. At the meanwhile, seenming C as a success, adding the former parameter in the prior distribution.\\
+   Then we can get the posterior distribution which is denoted as $p_2|X$, that is $p_2|X\sim Beta(2,3)$.\\
+   Finally we can easily get the probability of next time the letter C appearing, which is $\frac{2}{5}$. (Bayesian average in nature)
+
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[2]
+
+\begin{enumerate}[a]
+    \item
+    Assume $I_j$ is the original index of the r.v. $X_j^*$.\\
+    Then by Adam's law, we can get,
+    \begin{align*}
+        E[X_j^*]=E[E[X_j^*|I_j]]=E[[E[X_{I_j}]]]=E[\mu]=\mu
+    \end{align*}
+    By Eve's law, we can get,
+    \begin{align*}
+        Var[X_j^*]&=Var[E[X_j^*|I_j]]+E[Var[X_j^*|I_j]]\\
+        &=Var[E[X_{I_j}]]+E[Var[X_{I_j}]]\\
+        &=Var[\mu]+E[\sigma^2]\\
+        &=\sigma^2
+    \end{align*}
+\end{enumerate}
+\begin{enumerate}[b]
+    \item
+     (1)$E[\overline{X^*}|X_1,\cdots,X_n]$
+     \begin{align*}
+        E[\overline{X^*}|X_1,\cdots,X_n]&=E[\frac{1}{n}(X_1^*+\cdots+X_n^*)|X_1,\cdots,X_n]\\
+        &=\frac{1}{n}\sum_{j=1}^{n}E[X_j^*|X_1,\cdots,X_n]\\
+        &=E[X_1^*|X_1,\cdots,X_n]\\
+        By\ the\ hint\\ 
+        &=\frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}\frac{1}{n}X_j\\
+        &=\overline{X}
+     \end{align*}
+     $E[\overline{X^*}|X_1,\cdots,X_n]=\overline{X}$\\
+     (2)$Var[\overline{X^*}|X_1,\cdots,X_n]$
+     \begin{align*}
+        Var[\overline{X^*}|X_1,\cdots,X_n]&=Var[\frac{1}{n}(X_1^*+\cdots+X_n^*)|X_1,\cdots,X_n]\\
+        &=\frac{1}{n^2}\sum_{j=1}^{n}Var[X_j^*|X_1,\cdots,X_n]\\
+        &=\frac{1}{n^2}\sum_{j=1}^{n}[E[(X_j^*)^2|X_1,\cdots,X_n]-E[X_j^*|X_1,\cdots,X_n]^2]\\
+        &=\frac{1}{n^2}\sum_{j=1}^{n}(\frac{1}{n}\sum_{i=1}^{n}X_i^2-\overline{X_n^2})\\
+     \end{align*}
+\end{enumerate}
+\begin{enumerate}[c]
+    \item
+    By Adam's law, we can get,
+    \begin{align*}
+        E[\overline{X^*}]=E[E[\overline{X^*}|X_1,\cdots,X_n]]=E[\overline{X}]=\mu
+    \end{align*}
+    By Eve's law, we can get.
+    And $Var(\overline{X})=\sigma^2/n$, $E[\overline{X}^2]=\frac{\sigma^2}{n}+\mu^2$, Then we can get,
+    \begin{align*}
+        Var[\overline{X^*}]&=E[Var[\overline{X^*}|X_1,\cdots,X_n]]+Var[E[\overline{X^*}|X_1,\cdots,X_n]]\\
+            &=E[\frac{1}{n^2}\sum_{j=1}^{n}(X_j-\overline{X})^2]+Var[\overline{X}]\\
+            &=\frac{(n-1)\sigma^2}{n^2}+\frac{\sigma^2}{n}
+    \end{align*}
+\end{enumerate}
+\begin{enumerate}[d]
+    \item
+    $\overline{X^*}$ has bigger uncertainty than the original r.v.s, because $X_1^*,\cdots,X_n^*$ are formed from $X_j$ choosing randomly for $j\in \{1,\cdots,n\}$.\\
+    Then we have $Var(\overline{X})<Var(\overline{X^*})$.
+\end{enumerate}
+
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[3]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    (1)HT\\
+    First assume $w_1$ is the number of tosses until the "H" appears for the first time.\\
+    Assume $w_2$ is the number of tosses until the "T" appears for the first time.\\
+    Assume $w_{HT}$ is the number of tosses until the "HT" appears for the first time.\\
+    Then we can easily get $w_1\sim Fs(p)$, $w_2\sim Fs(1-p)$, and $w_{HT}=w_1+w_2$.\\
+    From the property of Fs distribution, finally we get the answer,
+    \begin{align*}
+        E[w_{HT}]=E[w_1+w_2]=E[w_1]+E[w_2]=\frac{1}{p}+\frac{1}{1-p}
+    \end{align*}
+    (2)HH\\
+    Assume $O_1$ is the outcome of the first toss, $O_2$ is the outcome of the second toss.\\
+    Assume $w_{HH}$ is the number of the tosses until the "HH" appears for the first time.\\
+    Next, we can use LOTE to get the result,
+    \begin{align*}
+        E[w_{HH}]&=E[w_{HH}|O_1=H]P(O_1=H)+E[w_{HH}|0_1=T]P(O_1=T)\\
+        Because\ of\ memeryless\\
+        &=E[w_{HH}|O_1=H]p+(E[w_{HH}]+1)(1-p)\\
+        E[w_{HH}|O_1=H]&=E[w_{HH}|O_1=H,O_2=H]P(O_2=H|O_1=H)\\&+E[w_{HH}|O_1=H,O_2=T]P(O_2=T|O_1=H)\\
+        Because\ O_1\ and\ O_2\ are\ independent\\
+        E[w_{HH}|O_1=H]&=E[w_{HH}|O_1=H,O_2=H]P(O_2=H)+E[w_{HH}|O_1=H,O_2=T]P(O_2=T)\\
+        E[w_{HH}|O_1=H]&=E[w_{HH}|O_1=H,O_2=H]p+E[w_{HH}|O_1=H,O_2=T](1-p)\\
+        E[w_{HH}|O_1=H]&=E[w_{HH}|O_1=H,O_2=H]p+E[w_{HH}|O_1=H,O_2=T](1-p)\\
+        Because\ of\ memeryless\\
+        E[w_{HH}|O_1=H]&=2p+(E[w_{HH}]+2)(1-p)\\
+    \end{align*}
+    Then we can get the final expression,
+    \begin{align*}
+        E[w_{HH}]&=p(2p+(E[w_{HH}]+2)(1-p))+(1-p)(E[w_{HH}]+1)\\
+        &=\frac{1}{p}+\frac{1}{p^2}
+    \end{align*}
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    From the question, we need to calculate three parameters to get the corresponding answers in (a). They are $E[\frac{1}{p}]$, $E[\frac{1}{1-p}]$, $E[\frac{1}{p^2}]$.\\
+    And we already have $p\sim Beta(a,b)$.\\
+    (1)$E[\frac{1}{p}]$
+    \begin{align*}
+        E[\frac{1}{p}]=&=\frac{\Gamma (a+b)}{\Gamma (a)\Gamma (b)}\int_{0}^{1}\frac{1}{p}p^{a-1}(1-p)^{b-1}  \,dp\\
+        &= \frac{\Gamma (a+b)}{\Gamma (a)\Gamma (b)}\frac{\Gamma(a-1)\Gamma(b)}{\Gamma(a+b-1)}\\
+        &=\frac{a+b-1}{a-1}
+    \end{align*}
+    (2)$E[\frac{1}{p^2}]$
+    \begin{align*}
+        E[\frac{1}{p}]=&=\frac{\Gamma (a+b)}{\Gamma (a)\Gamma (b)}\int_{0}^{1}\frac{1}{p^2}p^{a-1}(1-p)^{b-1}  \,dp\\
+        &= \frac{\Gamma (a+b)}{\Gamma (a)\Gamma (b)}\frac{\Gamma(a-2)\Gamma(b)}{\Gamma(a+b-2)}\\
+        &=\frac{(a+b-1)(a+b-2)}{(a-1)(a-2)}
+    \end{align*}
+    (3)$E[\frac{1}{(1-p)}]$
+    \begin{align*}
+        E[\frac{1}{1-p}]=&=\frac{\Gamma (a+b)}{\Gamma (a)\Gamma (b)}\int_{0}^{1}\frac{1}{1-p}p^{a-1}(1-p)^{b-1}  \,dp\\
+        &= \frac{\Gamma (a+b)}{\Gamma (a)\Gamma (b)}\frac{\Gamma(a)\Gamma(b-1)}{\Gamma(a+b-1)}\\
+        &=\frac{a+b-1}{b-1}
+    \end{align*}
+    Then we can subtitude the value we get into the expression in (a) and get the final answer.
+    \begin{align*}
+        E[w_{HH}]&=\frac{a+b-1}{a-1}+\frac{(a+b-1)(a+b-2)}{(a-1)(a-2)}\\
+        E[w_{HT}]&=\frac{a+b-1}{a-1}+\frac{a+b-1}{b-1}
+    \end{align*}
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[4]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    Let N be the total number of rolls we needed, and $X_j$ represents the $j_{th}$ roll number.
+    Then we can use LOTE to have $E[N]=E[N|X_1=1]\frac{1}{6}+E[N|X_1\neq 1]\frac{5}{6}$.
+    And then because memoryless property we can simlify it and get the following expression.
+    \begin{align*}
+        E[N]=E[N|X_1=1]\frac{1}{6}+(E[N]+1)\frac{5}{6}
+    \end{align*}
+    And then for $E[N|X_1=1]$, we can also use LOTE,
+    \begin{align*}
+        E[N|X_1=1]=\sum_{i=1}^{6}E[N|X_1=1,X_2=k]P(X_2=k|X_1=1)=\frac{2}{6}+\frac{E[N|X_1=1]+1}{6}+\frac{4(E[N]+2)}{6}
+    \end{align*}
+    Then we subtitude $E[N|X_1=1]$ into the expression of $E[N]$, finally we can get $E[N]=36$.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    For this question, the concrete process is similar with (a), and what we need to change is the expression of $E[N|X_1=1]$.
+    \begin{align*}
+        E[N|X_1=1]=\frac{2}{6}+\frac{5(E[N]+2)}{6}
+    \end{align*}
+    And then we subtitude $E[N|X_1=1]$ into the expression of $E[N]$, finally we can get $E[N]=42$.
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item
+    Assume $X_n$ is the number of tosses until there are n continuous appearance of the same number.\\
+    And then on the basis of $X_n$, next time we have $\frac{1}{6}$ probability to get $X_{n+1}$, and with $\frac{5}{6}$ probability we need to get another n+1 continuous same number tosses, which can be denoted as $X_n+X_{n+1}$.\\
+    Therefore we can get the expression as follows,
+    \begin{align*}
+        a_{n+1}=\frac{1}{6}(a_n+1)+\frac{1}{6}(a_n+a_{n+1})
+    \end{align*}
+    Finally we can get the answer $a_{n+1}=6a_n+1$ and $a_1=1$, $n>=1$.
+\end{enumerate}
+\begin{enumerate}[(d)]
+    \item
+    Then we can use the equation in (c) to get the answer.\\
+    $a_1=1$, $a_2=1+6=7$, $a_3=6*7+1=43$, $a_4=43*6+1=259$, $a_5=259*6+1=1555$, $a_6=1555*6+1=9331$, $a_7=9331*6+1=55987$.
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[5]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    Intuitively, from the expression $y=ax+b$, we can directly get $x=\frac{1}{a}(y-b)$. So at the first sight, we may think $\frac{1}{a}$ is the slope of the best line for predicting X form Y.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    Construct $Cov(X,Y-cX)$, and from the properties of covariance, then we can have,
+    \begin{align*}
+        Cov(X,Y-cX)&=Cov(X,Y)-cCov(X,X)\\
+        Because\ they\ are\ standard\ normal\ distribution\\
+        &=\rho -c
+    \end{align*}
+    And then let $Cov(X,Y-cX)=0$. Thereby $\rho =c$.\\
+    Then we can define $V=Y-cX$.\\
+    Because $X,Y$ are Bivariate Normal, then we can get any linear combination of $X,V$ are normal distribution. So they are Bivariate Normal too.\\
+    Then $V,X$ are independent of each other since $Cov(X,Y-cX)=0$ and they are uncorrelated.\\
+    Therefore $V=Y-\rho X$, $c=\rho$.
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item 
+    So in this question, we can get the correct answer by the same way in (b).\\
+    And the answer is $W=X-\rho Y$, and $d=\rho$.
+\end{enumerate}
+\begin{enumerate}[(d)]
+    \item 
+    (1)$E[X|Y]$
+    \begin{align*}
+        E[X|Y]=E[\rho Y+W|Y]=E[\rho Y|Y]+E[W|Y]=\rho Y+E[W]=\rho Y
+    \end{align*}
+    (2)$E[Y|X]$
+    \begin{align*}
+        E[Y|X]=E[\rho X+V|X]=E[\rho X|X]+E[V|X]=\rho X+E[V]=\rho X
+    \end{align*}
+\end{enumerate}
+\begin{enumerate}[(e)]
+    \item 
+    Then from the two expressions we get in (d), we can obviously get the correct answer, that is $\rho$ is the slope of the best line for predicting X from Y, not the reciprocal.\\
+    That is because there exists symmetry property in Correlation, that is $Corr(X,Y)=Corr(Y,X)=\rho$.\\
+    By the way, take $\rho=0$ as example. When $\rho=0$, $X,Y$ are independent of each other. Then we can get X given Y, that is $E[X]=0$. But if we want to get it by inverting $\rho$, obviously this is wrong.
+\end{enumerate}
+\end{homeworkProblem}    
+\end{document}

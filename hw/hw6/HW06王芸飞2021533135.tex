@@ -1,0 +1,256 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%  
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Class
+%   - Due date
+%   - Name
+%   - Student ID
+
+\newcommand{\hmwkTitle}{Homework\ \#06}
+\newcommand{\hmwkClass}{Probability \& Statistics for EECS}
+\newcommand{\hmwkDueDate}{March 26, 2023}
+\newcommand{\hmwkAuthorName}{Wang Yunfei}
+\newcommand{\hmwkAuthorID}{2021533135}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\\  \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 23:59}\\
+	\vspace{4in}
+}
+
+\author{
+	Name: \textbf{\hmwkAuthorName} \\
+	Student ID: \hmwkAuthorID}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[1]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    First assume the indicator $I_j$ is the event haveing the j-th toy in our collection after collecting t toys, $1<=j<=n$\\
+    Then what we want is the total number of distinct toy types and assume it as $I$, then $I=\sum_{j=1}^{n}I_j$.\\
+    Then $E[I]=E[\sum_{j=1}^{n}I_j]\sum_{j=1}^{n}E[I_j]$, because of the linearity of the expectation. \\
+    And because the events that $I_j$ represents are i.i.d.s.\\
+    Then we can simplify the formula, that is $E[I]=n*E[I_1]$. Then what we need to calculate is $E[I_1]$, for example.\\
+    Obviously it is easy to calculate from the opposed side, which means we collect other types except the first type in t times, that is $P=(\frac{n-1}{n})^t$.\\
+    Then we can get $E[I_1]=(1-P)*1+P*0=(1-(\frac{n-1}{n})^t)$.\\
+    Therefore, the answer is $E[I]=n*E[I_1]=n*(1-(\frac{n-1}{n})^t)$.
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[2]
+
+\begin{enumerate}
+    \item
+    First assume the indicator $I_j$ is the event that position j is a new run, for $<1=j<=n$.\\
+    And assume the event X is the number of new runs, and we can have $X=\sum_{j=1}^{n}I_j$.\\
+    Then we can get $I_1=1$ always, because this is the first time we flip. And for $2<=j<=n$, we can have $I_j=1$, when the result of $j-th$ toss is different from that of the $(j-1)th$ toss.\\
+    Then we can calculate when $j=1$, $E[I_j]=1*1+0*0=1$,\\
+    and when $2<=j<=n$, $P(I_j\ occurs)=P(j-1th\ toss is H)P(jth\ toss is T)+P(j-1th\ toss is T)P(jth\ toss is H)=2*p(1-p)$.\\
+    Then $E[X]=E[\sum_{j=1}^{n}I_j]=\sum_{j=1}^{n}E[I_j]=1+(n-1)*2*p(1-p)$, because of the linearity of the expectation and the sameness of the events which the indicator $I_j$s represent.
+    Therefore the result of the expected new runs is $2p(n-1)(1-p)+1$.
+\end{enumerate}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[3]
+    \solution
+    \begin{enumerate}[(a)]
+        \item
+        First from the question we can have that n elk is tagged and N-n is untagged. At the meanwhile, for the new method we need to make sure the last elk is tagged and it is one by one capturing without replacement. Therefore we can have the following formula:\\
+        $P(X=k)=\frac{\binom{n}{m-1}\binom{N-n}{k}}{\binom{N}{m+k-1}}*\frac{n-(m-1)}{N-(m+k-1)}$, for $0<=k<=N-n$.\\
+        And at the same time we can get $Y=X+m$, then we can substitute it into $P(X=k)$.\\
+        Then we can have $P(Y=i)=P(X=i-m)=\frac{\binom{n}{m-1}\binom{N-n}{i-m}}{\binom{N}{i-1}}*\frac{n-(m-1)}{N-(i-1)}$, for $m<=i<=N-n+m.$\\
+        Therefore we get them.
+    \end{enumerate}
+    \begin{enumerate}[(b)]
+     \item First we label the untagged elk as 1,2,3,$\cdots$N-n,and then assume the indicator $I_j$ is used for representing the event we capture the $j-th$ untagged elk being captured before any tagged elk during the new sample, for $1<=j<=N-n$.\\
+     And then we can define $X_i$, for $1<=i<=m$, which means before the $ith$ tagged elk being captured and after the $(i-1)th$ elk being captured, the number of capturing untagged elk.\\
+     So we have $X=X_1+\cdots+X_m$, and $X_i=I_1+\cdots+I_{N-n}$. And for $E[I_j]$, when it is under the condition of the $X_1$, it is equal to $\frac{1}{n+1}$ obviously, because it is before every tagged elk and the method is capturing one by one without replacement.\\
+     Then we can have $E[X_1]=E[\sum_{j=1}^{N-n}I_j]=\sum_{j=1}^{N-n}E[I_j]=\frac{(N-n)}{n+1}$, because of the linearity and they are same distribution.\\
+     And then we can have $E[X]=E[\sum_{i=1}^{m}X_i]=\sum_{i=1}^{m}E[X_i]=\frac{m(N-n)}{n+1}$, because of the linearity and they are same distribution.\\
+     And then we can get $E[Y]=E[X+m]=E[X]+m=\frac{m(N+1)}{n+1}$, because of the property of the expectation.
+    \end{enumerate}
+    \begin{enumerate}[(c)]
+        \item
+        From the definition of the capture-recapture, and assume the number of the tagged elk is M. Then we can have a formula $\frac{n}{N}=\frac{E[M]}{E[Y]}$.\\
+        Then $E[M]=\frac{n}{N}*\frac{m(N+1)}{n+1}$. Because $n<N$, then we can get $E[M]<m$.
+    \end{enumerate}
+\end{homeworkProblem}
+\begin{homeworkProblem}[4]
+    \solution
+        \begin{enumerate}[(a)]
+            \item
+            First we can assume that $p$ is the chance of a birthday match for 22 people, and $0<p<=0.5$ from the question.\\
+            And for $X=23$, $P(X<=23)=0.507>=0.5$, at the same time $P(X>=23)=1-P(X<=22)=1-p>=0.5$.\\
+            Therefore, the median of X is 23.\\
+            For $m>23$, $P(X>=m)=1-P(X<m)<=1-P(X<=23)<0.5$\\
+            For $m<23$, $P(X<=m)<=P(X<=22)=p<0.5$\\
+            Therefore, 23 is the unique median of X.
+        \end{enumerate}
+        \begin{enumerate}[(b)]
+            \item
+            Because $X=I_1+I_2+\cdots+I_{366}$ and the linearity of the expectation, \\
+            then $E[X]=E[\sum_{j=1}^{366}I_j]=\sum_{j=1}^{366}E[I_j]=\sum_{j=1}^{366}P(X>=j)$.\\
+            And obviously we have $P(X>=1)=1=p_1$, $P(X>=2)=1=p_2$, and $P(X>=j)=P(the\ first\ j-1\ people\ donnot\ have\ the\ match)=\frac{365*\cdots*(365-j+2)}{365^{j-1}}$.\\
+            After simplifying, it is equal to $p_j$, for $3<=j<=366$.\\
+            Finally, $E[X]=\sum_{j=1}^{366}p_j$. 
+        \end{enumerate}
+        \begin{enumerate}[(c)]
+            \item
+            After calculating, $E[X]\approx24.6166$.
+        \end{enumerate}
+        \begin{enumerate}[(d)]
+            \item
+            Because $Var[X]=E[X^2]-E[X]^2$, then we can have follows for $i<j$.
+            \begin{align*}
+                X^2&=I_1^2+I_2^2+\cdots+I_{366}^2+2\sum_{j=2}^{366}\sum_{i=1}^{j-1}I_iI_j\\
+            Because\ the\ property\ of\ the\ indicator\\
+                   &=I_1+I_2+\cdots+I_{366}+2\sum_{j=2}^{366}\sum_{i=1}^{j-1}I_j\\
+                   &=I_1+I_2+\cdots+I_{366}+2\sum_{j=2}^{366}(j-1)I_j\\
+                E[X^2]&=\sum_{j=1}^{366}E[I_j]+2*\sum_{j=2}^{366}(j-1)E[I_j]\\
+                    &=\sum_{j=1}^{366}p_j+2*\sum_{j=2}^{366}(j-1)p_j\\
+            \end{align*}
+            Therefore, $Var[X]=E[X^2]-E[X]^2=\sum_{j=1}^{366}p_j+2*\sum_{j=2}^{366}(j-1)p_j-(\sum_{j=1}^{366}p_j)^2\approx148.640$
+        \end{enumerate}
+    \end{homeworkProblem}
+    \begin{homeworkProblem}[5]
+    \solution
+        \begin{enumerate}[(a)]
+            \item
+            First we can calculate the total number through the method of unordered sampling with replacement, that is $\binom{14+5-1}{5-1}=3060$.\\
+            Second, we can eliminate out-of-bounds cases as follows.\\
+            (1)Randomly select one box and put seven balls in it and then assign seven balls to remaining four boxs, that is $5*\binom{7+4-1}{4-1}-\binom{5}{2}=590$, because it is still possible to assign seven balls all in one box.\\
+            (2)Randomly select one box and put eight balls in it and then assign six balls to remaining four boxs, that is $5*\binom{6+4-1}{4-1}=420$.\\
+            (3)Randomly select one box and put nine balls in it and then assign five balls to remaining four boxs, that is $5*\binom{5+4-1}{4-1}=280$.\\
+            (4)Randomly select one box and put ten balls in it and then assign four balls to remaining four boxs, that is $5*\binom{4+4-1}{4-1}=175$.\\
+            (5)Randomly select one box and put eleven balls in it and then assign three balls to remaining four boxs, that is $5*\binom{3+4-1}{4-1}=100$.\\
+            (6)Randomly select one box and put twelve balls in it and then assign two balls to remaining four boxs, that is $5*\binom{2+4-1}{4-1}=50$.\\
+            (7)Randomly select one box and put thirdteen balls in it and then assign one balls to remaining four boxs, that is $5*\binom{1+4-1}{4-1}=20$.\\
+            (8)Randomly select one box and put 14 balls in it and then assign 0 balls to remaining four boxs, that is $5*\binom{0+4-1}{4-1}=5$.\\
+            Then the result is $3060-(590+420+280+175+100+50+20+5)=1420$.
+        \end{enumerate}
+    \end{homeworkProblem}    
+\end{document}

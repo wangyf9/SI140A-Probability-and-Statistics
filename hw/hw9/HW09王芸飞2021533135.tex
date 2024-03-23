@@ -1,0 +1,375 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%  
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Class
+%   - Due date
+%   - Name
+%   - Student ID
+
+\newcommand{\hmwkTitle}{Homework\ \#09}
+\newcommand{\hmwkClass}{Probability \& Statistics for EECS}
+\newcommand{\hmwkDueDate}{April 16, 2023}
+\newcommand{\hmwkAuthorName}{Wang Yunfei}
+\newcommand{\hmwkAuthorID}{2021533135}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\\  \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 23:59}\\
+	\vspace{4in}
+}
+
+\author{
+	Name: \textbf{\hmwkAuthorName} \\
+	Student ID: \hmwkAuthorID}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[1]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    X,Y are discrete
+    \begin{align*}
+    P(Y=y|X=x)&=\frac{P(Y=y,X=x)}{P(X=x)}\\
+              &=\frac{P(X=x|Y=y)P(Y=y)}{P(X=x)}    
+    \end{align*}
+    This uses Bayes rule and the confine of it is $P(Y=y),P(X=x)>0$.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    X is discrete, Y is continuous
+    \begin{align*}
+    P(Y\in (y-\varepsilon ,y+\varepsilon )|X=x)&=\frac{P(X=x,Y\in (y-\varepsilon ,y+\varepsilon ))}{P(X=x)}\\
+              &=\frac{P(X=x|Y\in (y-\varepsilon ,y+\varepsilon ))P(Y\in (y-\varepsilon ,y+\varepsilon ))}{P(X=x)}\\
+              \frac{P(Y\in (y-\varepsilon ,y+\varepsilon )|X=x)}{2\varepsilon }&=\frac{P(X=x|Y\in (y-\varepsilon ,y+\varepsilon ))\frac{P(Y\in (y-\varepsilon ,y+\varepsilon ))}{2\varepsilon }}{P(X=x)}\\
+    Because\ the\ definition\ of\ integral\ and\ when\ \varepsilon =0 \\
+            f_Y(y|X=x)&=\frac{P(X=x|Y=y)f_Y(y)}{P(X=x)}
+    \end{align*}
+    This uses Bayes rule and the confine of it is $P(Y\in (y-\varepsilon ,y+\varepsilon )),P(X=x)>0$.
+   
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item
+    X is continuous, Y is discrete
+    \begin{align*}
+    P(Y=y|X\in (x-\varepsilon ,x+\varepsilon ))&=\frac{P(X\in (x-\varepsilon ,x+\varepsilon ),Y=y)}{P(X\in (x-\varepsilon ,x+\varepsilon ))}\\
+              &=\frac{P(X\in (x-\varepsilon ,x+\varepsilon )|Y=y)P(Y=y)}{P(X\in (x-\varepsilon ,x+\varepsilon ))}\\
+              P(Y\in (y-\varepsilon ,y+\varepsilon )|X=x)&=\frac{\frac{P(X\in(x-\varepsilon ,x+\varepsilon )|Y=y)}{2\varepsilon }P(Y=y) }{\frac{P(X\in (x-\varepsilon ,x+\varepsilon ))}{2\varepsilon }}\\
+    Because\ the\ definition\ of\ integral\ and\ when\ \varepsilon =0 \\
+    P(Y=y|X=x)&=\frac{f_X(x|Y=y)P(Y=y)}{f_X(x)}
+    \end{align*}
+    This uses Bayes rule and the confine of it is $P(Y=y),P(X\in (x-\varepsilon ,x+\varepsilon ))>0$.
+\end{enumerate}
+\begin{enumerate}[(d)]
+    \item
+    X,Y are continuous
+    \begin{align*}
+    P(Y\in (y-\varepsilon ,y+\varepsilon )|X\in (x-\varepsilon ,x+\varepsilon ))&=\frac{P(Y\in (y-\varepsilon ,y+\varepsilon ),X\in (x-\varepsilon ,x+\varepsilon ))}{P(X\in (x-\varepsilon ,x+\varepsilon ))}\\
+    \frac{P(Y\in (y-\varepsilon ,y+\varepsilon )|X\in (x-\varepsilon ,x+\varepsilon ))}{2\varepsilon }&=\frac{\frac{P(Y\in (y-\varepsilon ,y+\varepsilon ),X\in (x-\varepsilon ,x+\varepsilon ))}{4\varepsilon^2}}{\frac{P(X\in (x-\varepsilon ,x+\varepsilon ))}{2\varepsilon }}\\
+    Because\ the\ definition\ of\ integral\ and\ when\ \varepsilon =0 \\
+    f_{Y|X}(y|x)&=\frac{f_{X,Y}(x,y)}{f_X(x)}\\
+                &=\frac{f_{X|Y(x|y)f_Y(y)}}{f_X(x)}
+    \end{align*}
+    This uses Bayes rule and the confine of it is $P(Y\in (y-\varepsilon ,y+\varepsilon )),P(X\in (x-\varepsilon ,x+\varepsilon ))>0$.
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[2]
+
+\begin{enumerate}[(a)]
+    \item
+    Because $N=X+Y$, then $P(N=x+y|X=x,Y=y)=1$ and we can have:\\
+    $P(X=x,Y=y,N=n)=P(X=x,Y=y)$\\
+    Because $X$ and $Y$ are i.i.d., then we can have:\\
+    $P(X=x,Y=y)=P(X=x)P(Y=y)=p*q^x*p*q^y=p^2*q^{x+y}=p^2q^n$, for nonnegative integers $x,y,n$, and $n=x+y$.\\
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    From(1), we can also have:
+    \begin{align*}
+        P(X=x,N=n)&=P(X=x,Y=n-x,N=n)\\
+        &=P(X=x,Y=n-x)\\
+        &=P(X=x)P(Y=n-x)\\
+        &=p*q^x*p*q^{n-x}=p^2q^n
+    \end{align*}
+    For $0<=x<=n$.
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item
+    \begin{align*}
+        Bayes\ rule\\
+        P(X=x|N=n)&=\frac{P(X=x,N=n)}{P(N=n)}\\
+        LOTP\\
+                  &=\frac{p^2q^n}{\sum_{x=0}^{n}P(N=n|X=x)P(X=x)}\\
+        N=X+Y\\
+                  &=\frac{p^2q^n}{\sum_{x=0}^{n}P(X+Y=n|X=x)P(X=x)}\\
+                  &=\frac{p^2q^n}{\sum_{x=0}^{n}P(Y=n-x|X=x)P(X=x)}\\
+        Because\ of\ X,Y\ are\ i.i.d.\\
+                  &=\frac{p^2q^n}{\sum_{x=0}^{n}P(Y=n-x)P(X=x)}\\
+                  &=\frac{p^2q^n}{\sum_{x=0}^{n}p^2q^n}\\
+                  &=\frac{p^2q^n}{(n+1)p^2q^n}\\
+                  &=\frac{1}{n+1}
+    \end{align*}
+    At the same time, obviously we can get $N\sim NBin(2,p)$. That is because $X,Y$ are i.i.d. $Geom(p)$, and N=X+Y, then we 
+    can easily find that all we need to calculate is the number of the failture times before the second success. So we need to find one success and n failures in the first n+1 times. Then we have $P(N=n)=\binom{n+2-1}{2-1}p*p*q^n=(n+1)p^2q^n$. Therefore we can also get it.\\
+    Moreover, when N is given, $P(X=x|N=n)=\frac{1}{n+1}$ is exact.
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[3]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    From the question, we have
+    \begin{align*}
+        P(X<=x|X>c)&=\frac{P(X<=x,X>c)}{P(X>c)}\\
+                   &=\frac{P(c<X<=x)}{P(X>c)}\\
+                   &=\frac{P(X<=x)-P(X<=c)}{1-P(X<=c)}\\
+                   &=\frac{1-e^{-\lambda x}-1+e^{-\lambda c}}{1-1+e^{-\lambda c}}\\
+                   &=1-e^{-\lambda (x-c)}
+    \end{align*}
+    Then the conditional PDF of X given $X > c$ is $\lambda e^{-\lambda (x-c)}$. 
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    First if $x<=c$, then $P(X<=x|X<c)=1$.\\
+    On the other hand when $x>c$, we have
+    \begin{align*}
+        P(X<=x|X<c)&=\frac{P(X<=x,X<c)}{P(X<c)}\\
+                   &=\frac{P(X<=x)}{P(X<c)}\\
+                   &=\frac{1-e^{-\lambda x}}{1-e^{-\lambda c}}\\
+    \end{align*}
+    Then the conditional PDF of X given $X < c$ is $\frac{\lambda}{1-e^{-\lambda c}}e^{-\lambda x}$.
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[4]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    Because $M=max(U_1,U_2,U_3)$, then $P(M<=m)=P(U_1<=m,U_2<=m,U_3<=m)$.\\
+    Because $U_1,U_2,U_3$ are i.i.d. Unif(0,1), then 
+    \begin{align*}
+        F_M(m)=P(M<=m)=P(U_1<=m)P(U_2<=m)P(U_3<=m)=m^3
+    \end{align*}
+    For, $0<=m<=1$.\\
+    Then 
+    \begin{align*}
+        f_M(m)=3m^2
+    \end{align*}
+    For, $0<=m<=1$.\\
+    Because $P(M<=m)=P(L<=l,M<=m)+P(L>l,M<=m)$,\\
+    then $P(L<=l,M<=m)=P(M<=m)-P(L>l,M<=m)$.\\
+    So we need to calculate $P(L>l,M<=m)$ first and we also have the confine of l, which is $0<=l<=m<=1$.\\
+    \begin{align*}
+        P(L>l,M<=m)&=P(min(U_1,U_2,U_3)>l,max(U_1,U_2,U_3)<=m)\\
+        &=P(l<U_1<=m,l<U_2<=m,l<U_3<=m)\\
+        &=(m-l)^3\\
+    \end{align*}
+    Then 
+    \begin{align*}
+        F_{L,M}(l,m)=(L<=l,M<=m)&=m^3-(m-l)^3\\
+        &=3m^2l-3ml^2+l^3\\
+    \end{align*}
+    
+    And then we can also get the PDF by respectively differentiating l and m, that is
+    \begin{align*}
+        f_{L,M}(l,m)=6(m-l)
+    \end{align*}
+    for $0<=l<=m<=1$.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    What we want to get is $f_{M|L}(m,l)=\frac{f_{M,L}(m,l)}{f_L(l)}$,\\
+    so we just need to calculate $f_L(l)$, for $0<=l<=1$.\\
+    \begin{align*}
+        1-F_L(l)&=P(L>l)=P(U_1>l)P(U_2>l)P(U_3>l)=(1-l)^3\\
+        F_L(l)&=1-(1-l)^3\\
+        F_L(l)&=3l-3l^2+l^3\\
+        f_L(l)&=3-6l+3l^2\\
+        f_L(l)&=3(1-l)^2
+    \end{align*}
+    So $f_{M|L}(m,l)=\frac{2(m-l)}{(1-l)^2}$, for $0<=l<=m<=1$.\\
+\end{enumerate}     
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[5]
+\solution
+\begin{enumerate}[(a)]
+    \item 
+    First we can divide this problem into three cases.\\
+    case1, $l>m$, then $P(L=l,M=m)=0$\\
+    case2, $l=m$, then $P(L=l,M=m)=P(X=l,Y=l)$\\
+    Because they are independent Geom distribution, \\
+    so $P(X=l,Y=l)=P(X=l)P(Y=l)=p*q^l*p*q^l=p^2*q^{2l}$.\\
+    case3 is as follow,
+    \begin{align*}
+        P(L=l,M=m)&=P(X=l,Y=m)+P(X=m,Y=l)\\
+        Because\ X,Y\ are\ i.i.d.\\
+                  &=P(X=l)P(Y=m)+P(X=m)P(Y=l)\\
+                  &=p*q^l*p*q^m+p*q^m*p*q^l\\
+                  &=2p^2q^{m+l}
+    \end{align*}
+    From the cases we divied, obviously they are not independent. Because if we have known something about L, then we can also have some information about M, due to $L<=M$. 
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    From (1), we can have
+    \begin{align*}
+    P(L=l)&=\sum_{m=0}^{\infty}P(L=l,M=m)\\
+          &=P(L=l,M=l)+\sum_{m=l+1}^{\infty}P(L=l,M=m)\\
+          &=p^2q^{2l}+2p^2q^l\sum_m{m=l+1}^{\infty}q^m\\
+          &=p^2q^{2l}+2pq^{2l+1}
+   \end{align*}
+   By using story, all we need to do is to translate $L=min(X,Y)$.\\
+    L can be seemed as X,Y at least happen one for the first success when L=l. So L is also a Geom distribution and $p_l=2p-p^2$.\\
+    That is $L\sim Geom(2p-p^2)$.\\
+    Then $P(L=l)=(2p-p^2)(1-2p+p^2)^l=(2p-p^2)((1-p)^2)^l=(2p-p^2)q^{2l}=(p^2+2p(1-p))q^{2l}=p^2q^{2l}+2pq^{2l+1}$\\
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item
+    Because $E[M+L]=E[X+Y]$, then we have
+    \begin{align*}
+        E[M]+E[L]&=E[X]+E[Y]\\
+                E[M]&=E[X]+E[Y]-E[L]\\
+                &=\frac{1-p}{p}+\frac{1-p}{p}-\frac{1-2p+p^2}{2p-p^2}\\
+                &=\frac{(1-p)(3-p)}{(2-p)p}
+    \end{align*}
+\end{enumerate}
+\begin{enumerate}[(d)]
+    \item
+    From the question and (a), and because $n>=0$, then we have
+   \begin{align*}
+    P(L=l,M-L=n)&=P(L=l,M=n+l)\\
+                &=2p^2q^{l+n+l}\\
+                &=2p^2q^{n+2l}
+   \end{align*}
+   So for the joint PMF of L and M-L, and because n and l are nonnegative integers, then we can use the theorem and get\\
+   $f_{L,M-L}(l,n)=g(l)h(n)$, and $g(l)=a*q^{2l}$, and $h(n)=b*q^n$.\\
+   To get the valid PMF, $g(l)=a\sum_{l=0}^{\infty}(q^2)^l=a*\frac{1}{1-q^2}=1$, then we can get $a=1-q^2$.\\
+   And for another one, this must be valid too, so $h(n)=\frac{2p^2q^n}{1-q^2}$.\\
+   Therefore $L,M-L$ are independent.
+\end{enumerate}
+\end{homeworkProblem}    
+\end{document}

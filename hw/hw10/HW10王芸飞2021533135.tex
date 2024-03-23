@@ -1,0 +1,358 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%  
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Class
+%   - Due date
+%   - Name
+%   - Student ID
+
+\newcommand{\hmwkTitle}{Homework\ \#10}
+\newcommand{\hmwkClass}{Probability \& Statistics for EECS}
+\newcommand{\hmwkDueDate}{April 23, 2023}
+\newcommand{\hmwkAuthorName}{Wang Yunfei}
+\newcommand{\hmwkAuthorID}{2021533135}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\\  \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 23:59}\\
+	\vspace{4in}
+}
+
+\author{
+	Name: \textbf{\hmwkAuthorName} \\
+	Student ID: \hmwkAuthorID}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[1]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    X,Y are discrete
+    \begin{align*}
+        P(X=x)&=P(\cup_y(X=x,Y=y ) )\\
+                &=\sum_{y}P(X=x,Y=y)\\
+        Because\ of\ bayes\ rule\\
+                &=\sum_{y}P(X=x|Y=y)P(Y=y)
+    \end{align*}
+    This uses Bayes rule so the confine of it is $P(Y=y)>0$.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    X is discrete, Y is continuous, so from the bayes rule we have,
+    \begin{align*}
+        f_Y(y|X=x)&=\frac{P(X=x|Y=y)f_Y(y)}{P(X=x)}\\
+            P(X=x|Y=y)f_Y(y)&=f_Y(y|X=x)P(X=x)\\
+            \int_{-\infty}^{\infty} P(X=x|Y=y)f_Y(y) \,dy&=\int_{-\infty}^{\infty} f_Y(y|X=x)P(X=x) \,dy\\ 
+            &=P(X=x)\int_{-\infty}^{\infty} f_Y(y|X=x) \,dy\\
+            Because\ of\ the\ property\ of\ the\ conditional\ Probability\\
+            &=P(X=x)*1\\
+            &=P(X=x)\\
+    \end{align*}
+    Then we get it, $P(X=x)=\int_{-\infty}^{\infty} P(X=x|Y=y)f_Y(y) \,dy$\\
+   
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item
+    X is continuous, Y is discrete, so from the discrete form of LOTP, we can have, 
+    \begin{align*}
+    P(X\in (x-\varepsilon ,x+\varepsilon ))&=\sum_{y}^{}P(X\in (x-\varepsilon ,x+\varepsilon )|Y=y)P(Y=y)\\
+    lim_{\varepsilon \rightarrow 0}\frac{P(X\in (x-\varepsilon ,x+\varepsilon ))}{2\varepsilon}&=lim_{\varepsilon \rightarrow 0}\sum_{y}^{}\frac{P(X\in (x-\varepsilon ,x+\varepsilon )|Y=y)}{2\varepsilon} P(Y=y)\\
+    Because\ the\ definition\ of\ integral\ and\ when\ \varepsilon\ approaches\ to\ 0 \\
+    f_X(x)&=\sum_{y}^{}f_X(x|Y=y)P(Y=y)
+    \end{align*}
+    Then we get it.
+\end{enumerate}
+\begin{enumerate}[(d)]
+    \item
+    X,Y are continuous,so from the continuous form of Bayes rule, we can have, 
+    \begin{align*}
+    f_{Y|X}(y|x)&=\frac{f_{X|Y}(x|y)f_Y(y)}{f_X(x)}\\
+    f_{Y|X}(y|x)f_X(x)&=f_{X|Y}(x|y)f_Y(y)\\
+    \int_{-\infty}^{\infty} f_{Y|X}(y|x)f_X(x) \,dy&=\int_{-\infty}^{\infty} f_{X|Y}(x|y)f_Y(y) \,dy\\ 
+    f_X(x)\int_{-\infty}^{\infty} f_{Y|X}(y|x)\,dy&=\int_{-\infty}^{\infty} f_{X|Y}(x|y)f_Y(y) \,dy\\ 
+    Because\ of\ the\ property\ of\ the\ conditional\ Probability\\
+    f_X(x)*1&=\int_{-\infty}^{\infty} f_{X|Y}(x|y)f_Y(y) \,dy\\ 
+    f_X(x)&=\int_{-\infty}^{\infty} f_{X|Y}(x|y)f_Y(y) \,dy
+    \end{align*}
+    Then we get it.
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[2]
+
+\begin{enumerate}[(a)]
+    \item
+   assume U is the time of arrival of next Blissville company bus, $U\sim Unif(0,15)$.\\
+   assume E is the time of arrival of next Blotchiville company bus , $E\sim Expo(\frac{1}{15})$.\\
+   Then from LOTP we can have,
+   \begin{align*}
+    P(E<U)&=\int_{0}^{15} P(E<U|U=u)f_U(u) \,du \\
+    Because\ of\ independent\\
+    &=\frac{1}{15}\int_{0}^{15} P(E<U) \,du \\
+    &=\frac{1}{15}\int_{0}^{15} 1-e^{-\frac{1}{15}u}\,du \\
+    &=\frac{1}{e}
+   \end{align*}
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    Let X is the time of $min(U,E)$.\\
+    Then $P(X>x)=P(U>x,E>x)=P(U>x)P(E>x)=\frac{15-x}{15}*(1-1+e^{-\frac{1}{15}x})=\frac{15-x}{15}e^{-\frac{1}{15}x}$.\\
+    Then $F_X(x)=1-p(X>t)=1-\frac{15-x}{15}e^{-\frac{1}{15}x}$, for $0<=x<=15$ and otherwise =0.\\
+\end{enumerate}
+
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[3]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    When $x+y\neq n$, $P(X=x,Y=y,N=n)=0$\\
+    When $x+y=n$, 
+    \begin{align*}
+        P(X=x,Y=y,N=n)&=P(X=x,Y=y,N=x+y)\\
+        &=P(X=x,Y=y|N=x+y)P(N=x+y)\\
+        &=P(X=x,Y=n-x)P(N=x+y)\\
+        &=\binom{n}{x}p^x(1-p)^y\frac{\lambda^ne^{-\lambda}}{n!}
+    \end{align*}
+   They are not independent, because when $x+y\neq n$, $P(X=x,Y=y,N=n)=0$, but at the same time $P(X=x)P(Y=y)P(N=n)\neq 0$.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+when $x>n$, $P(X=x,N=n)=0$\\
+when $x<=n$,
+\begin{align*}
+    P(X=x,N=n)&=P(X=x|N=n)P(N=n)\\
+    &=\binom{n}{x}p^x(1-p)^{n-x}\frac{\lambda^ne^{-\lambda}}{n!}
+\end{align*}
+Then we can consider $P(X=x)$ from LOTP,
+\begin{align*}
+    P(X=x)&=\sum_{n=0}^{\infty}P(X=x|N=n)P(N=n)\\
+    &=\sum_{n=x}^{\infty}\binom{n}{x}p^x(1-p)^{n-x}\frac{\lambda^ne^{-\lambda}}{n!}\\
+    Let\ n-x=t\\
+    &=\frac{(\lambda p)^xe^{-\lambda}}{x!}\sum_{t=0}^{\infty}\frac{[\lambda(1-p)]^t}{t!}\\
+    From\ talor\ expansion\\
+    &=\frac{(\lambda p)^xe^{-\lambda}}{x!}e^{\lambda (1-p)}\\
+    &=\frac{(\lambda p)^xe^{-\lambda p}}{x!}
+\end{align*}
+Therefore $P(X=x|N=n)\neq P(X=x)$ obviously. Then $N,X$ are dependent.
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item
+\begin{align*}
+    P(X=x,Y=y)&=\sum_{n=0}^{\infty}P(X=x,Y=y,N=n)\\
+    From\ the\ result\ of\ (a),\ n=x+y,\ otherwise\ P=0\\
+    &=\binom{n}{x}p^x(1-p)^y\frac{\lambda^ne^{-\lambda}}{n!}\\
+\end{align*}
+Like (b), we can also analyse $P(Y=y)$,
+\begin{align*}
+    P(Y=y)=\sum_{n=0}^{\infty}P(Y=y|N=n)P(N=n)\\
+    &=\sum_{n=0}^{\infty}\binom{n}{y}p^{n-y}(1-p)^{y}\frac{\lambda^ne^{-\lambda}}{n!}\\
+    Let\ n-y=t\ and\ from\ talor\ expansion\\
+    &=\frac{(\lambda (1-p))^ye^{-\lambda (1-p)}}{y!}
+\end{align*}
+Therefore $P(X=x)P(Y=y)=\frac{(\lambda (1-p))^ye^{-\lambda (1-p)}}{y!}*\frac{(\lambda p)^xe^{-\lambda p}}{x!}$.\\
+Then we can get $P(X=x,Y=y)=P(X=x)P(Y=y)$, and then they are independent.
+\end{enumerate}
+\begin{enumerate}[(d)]
+    \item
+From the work we have done, we can know $X\sim Pois(\lambda p)$, $Y\sim Pois(\lambda (1-p))$ and they are independent.\\
+    \begin{align*}
+    Cov(N,X)&=Cov(X+Y,X)\\
+    &=Cov(X,X)+Cov(X,Y)\\
+    From\ the\ property\ of\ Covariance\\
+    &=Var(X)\\
+    &=\lambda p\\
+    Corr(N,X)&=\frac{Cov(N,X)}{\sqrt[2]{\lambda \lambda p}}\\
+    &=\sqrt{p}
+\end{align*}
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[4]
+\solution
+\begin{enumerate}[(a)]
+    \item 
+    Assume $X,Y\sim N(0,1)$, and $M_1=max(X,Y)$, $M_2=min(X,Y)$.\\
+    From the def we can have $X+Y=M_1+M_2$ and $XY=M_1M_2$ and $M_1-M_2=\left\lvert X-Y \right\rvert $.\\
+    And what we want to get is $Corr(M_1,M_2)=\frac{Cov(M_1,M_2)}{\sqrt{var(M_1)var(M_2)}}$.\\
+    So first we calculate $Cov(M_1,M_2)=E[M_1M_2]-E[M_1]E[M_2]$.\\
+    And from what we have, we can get $E[M_1M_2]=E[XY]=E[X]E[Y]=0*0=0$.\\
+    So we just need to calculate $E[M_1],E[M_2]$.\\
+    \begin{align}
+        E[M_1+M_2]=E[M_1]+E[M_2]=E[X+Y]=E[X]+E[Y]=0+0=0\\
+        E[M_1-M_2]=E[M_1]-E[M_2]=E[\left\lvert X-Y \right\rvert]
+    \end{align}
+    From the property of symmetry, we have $-Y\sim N(0,1)$.\\
+    And then $X-Y\sim N(0,2)$, which can be proved by MGF.\\
+    And then we can denote it as $X-Y=\sqrt{2}Z$, in which $Z\sim N(0,1)$.\\
+    Then we can have $E[\left\lvert X-Y \right\rvert]=E[\left\lvert \sqrt{2}Z \right\rvert]=\sqrt{2}E[\left\lvert Z \right\rvert]=2\sqrt{2}\int_{0}^{\infty} \frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}} \,dz=\frac{2}{\sqrt{\pi}} $.\\
+    Therefore we can get $E[M_1]=\frac{1}{\sqrt{\pi}}$, $E[M_2]=-\frac{1}{\sqrt{\pi}}$.\\
+    Thereby we can get $Cov(M_1,M_2)=\frac{1}{\pi}$.\\
+    Next what we need to calculate is $var(M_1)=E[M_1^2]-E[M_1]^2=E[M_1^2]-\frac{1}{\pi}$, $var(M_2)=E[M_2^2]-\frac{1}{\pi}$.\\
+    Because of the symmetry property, we can have $var(M_1)=var(M_2)$ and let us assume it as $x$.\\
+    \begin{align}
+        E[(X-Y)^2]-E[X-Y]^2=E[(X-Y)^2]-0=var(X-Y)=2\\
+        E[M_1^2]+E[M_2^2]-2E[M_1M_2]=E[\left\lvert X-Y \right\rvert^2]-0=E[(X-Y)^2]
+    \end{align}
+    Then we can get $x=1-\frac{1}{\pi}$.\\
+    So the final answer is $Corr=\frac{\frac{1}{\pi}}{1-\frac{1}{\pi}}=\frac{1}{\pi -1}$. 
+\end{enumerate}
+\end{homeworkProblem}
+\newpage
+\begin{homeworkProblem}[5]
+\solution
+\begin{enumerate}[(a)]
+    \item 
+    From the def of Expectation, then we have $E[X]=\overline{x}$, $E[Y]=\overline{y}$.\\
+    And $P(X=x_i,Y=y_i)=\frac{1}{n}$ because we choose one pair from n pairs uniformly in random.\\
+    Then, 
+    \begin{align*}
+        Cov(X,Y)&=E[(X-EX)(Y-EY)]\\
+        &=E[(X-\overline{x})(Y-\overline{y})]\\
+        &=\sum_{i=1}^{n}P(X=x_i,Y=y_i)(x_i-\overline{x})(y_i-\overline{y})\\
+        &=\frac{1}{n}\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})\\
+        &=r
+    \end{align*}
+    Therefore, $Cov(X,Y)$ is related to the sample variance.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    First the total signed area is $S=\sum_{i<j}(x_i-x_j)(y_i-y_j)$.\\
+    Also $E[(X-\widetilde{X})(Y-\widetilde{Y})]=E[XY]+E[\widetilde{X}\widetilde{Y}]-E[X\widetilde{Y}]-E[Y\widetilde{X}]$.\\
+    Because $XY$ and $\widetilde{X}\widetilde{Y}$ are the same distribution, and $X$ and $\widetilde{Y}$ are independent and similarly for $\widetilde{X}$ and $Y$.\\
+    Then we can have $E[(X-\widetilde{X})(Y-\widetilde{Y})]=2E[XY]-2E[X]E[Y]=2Cov(X,Y)=2r$.\\
+    Then we can consider $E[(X-\widetilde{X})(Y-\widetilde{Y})]=\frac{1}{n^2}\sum_{i=1}^{n}\sum_{j=1}^{n}(x_i-x_j)(y_i-y_j)$.\\
+    And $E[(X-\widetilde{X})(Y-\widetilde{Y})]=\frac{n*0+2\sum_{i<j}(x_i-x_j)(y_i-y_j)}{n^2}=\frac{2S}{n^2}$.\\
+    Then $S=n^2r$.
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item
+    (i)Reeversing the axes does not affect the area of the rectangle.\\
+    (ii)Scaling the width and weight along its axis just changes the area by the same factor. Then we just need to multiply a1 and a2.\\
+    (iii)Shifting will not influence the area of rectangle, because the length is relative.\\ 
+    (iv)A rectangle, whose width is a and height is b+c, can be divided into two small rectangles. One is $a*b$, and another is $b*c$. Obviously the area of the big original rectangle is equal to that of the two small rectangles. At the same time, A positive-area rectangle is divided into two positive-area rectangles and a negative-area rectangle is divided into two negative-area rectangles.
+\end{enumerate}
+\end{homeworkProblem}    
+\end{document}

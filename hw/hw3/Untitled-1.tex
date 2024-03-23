@@ -1,0 +1,248 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%  
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Class
+%   - Due date
+%   - Name
+%   - Student ID
+
+\newcommand{\hmwkTitle}{Homework\ \#03}
+\newcommand{\hmwkClass}{Probability \& Statistics for EECS}
+\newcommand{\hmwkDueDate}{March 05, 2023}
+\newcommand{\hmwkAuthorName}{Wang Yunfei}
+\newcommand{\hmwkAuthorID}{2021533135}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\\  \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 23:59}\\
+	\vspace{4in}
+}
+
+\author{
+	Name: \textbf{\hmwkAuthorName} \\
+	Student ID: \hmwkAuthorID}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[1]
+    \solution
+        \begin{enumerate}
+            \item We can directly calculate the probability of the system working and divide it into the following 5 cases.\\
+            First, five devices all function and there is just one situation, that is $P(5)=1*p^5$.\\
+            Second, four devices function and there are $\binom{5}{4}=5$ situations, that is $P(4)=5*p^4*(1-p)$.\\ 
+            Third, two devices funtion and there are two situations, those are 1 with 3 and 2 with 4. So $P(2)=2*p^2*(1-p)^3$.\\
+            Fourth, there devices function and there are eight situations. On the basis of 1 and 3 we have 3 cases, on the basis of 2 and 4 we also have 3 cases and on the crossover we have 2 cases namely 1, 4, 5 and 2, 3, 5.\\
+            Therefore, $P(3)=8*p^3*(1-p)^2$.\\
+            Fifth, one device cannot let system function, and it is similar with the condition of zero device.\\
+            Finally, $P(system \ functions)=P(2)+P(3)+P(4)+P(5)=2p^5-5p^4+2p^3+2p^2$.
+        \end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[2]
+\solution
+\begin{enumerate}[(a)]
+    \item Assume event C: admit an applicant.\\
+    Assume event A: applicant is good at Apex.\\
+    Assume event B: applicant is good at Genshin Impact.\\
+    And from the question, we have $C = A \ or \  B$.\\
+    Then we have $1=P(A\cup B|C )=P(A|C)+P(B|C)-P(A\cap B|C )$. And then we can assume two events are disjoint, then we can explain it intuitively, because the sum of the probability of two events is 1.
+    Due to the increasement of $P(A)$, $P(B)$ must decrease. And we can also intuitively explain similarly when two events are joint, because we donnot need to care the part where they are joint.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item From the question and the Bayes' formula, we have $P(A\cap B\cap C)=P(A\cap B|C)P(C)=P(A|B\cap C)P(B|C)P(C)$.\\
+    and then we can eliminate $P(C)$ at both sides, and then have $P(A\cap B|C)=P(A|B\cap C)P(B|C)$.\\
+    And we have $P(A | B \cap C) < P(A | C)$. Therefore we can prove $P(A\cap B|C)\neq P(B|C)P(A |C)$.\\
+    So A and B are conditionally dependent given C.
+  
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[3]
+\solution
+\begin{enumerate}[(a)]
+    \item $p_n=\frac{1}{6}(p_{n-1}+p_{n-2}+p_{n-3}+p_{n-4}+p_{n-5}+p_{n-6})$ for $n>0$. At the meantime, $p_0=1$ and $p_k=0$ for $k<0$.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item 
+    First, we need to calculate $p_1$, $p_2$, $p_3$, $p_4$, $p_5$, $p_6$. \\
+    $p_1=\frac{1}{6}(p_{-1}+p_{-2}+p_{-3}+p_{-4}+p_{-5}+p_{0})=\frac{1}{6}$.\\
+    $p_2=\frac{1}{6}(p_{1}+p_{-1}+p_{-2}+p_{-3}+p_{-4}+p_{0})=\frac{7}{36}$.\\
+    $p_3=\frac{1}{6}(p_{1}+p_{2}+p_{-1}+p_{-2}+p_{-3}+p_{0})=\frac{49}{216}$.\\
+    $p_4=\frac{1}{6}(p_{1}+p_{2}+p_{3}+p_{-1}+p_{-2}+p_{0})=\frac{343}{1296}$.\\
+    $p_5=\frac{1}{6}(p_{1}+p_{2}+p_{3}+p_{4}+p_{-1}+p_{0})=\frac{2401}{7776}$.\\
+    $p_6=\frac{1}{6}(p_{1}+p_{2}+p_{3}+p_{4}+p_{5}+p_{0})=0.3602$.\\
+    $p_7=\frac{1}{6}(p_{1}+p_{2}+p_{3}+p_{4}+p_{5}+p_{6})=0.2536$.\\
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item The expectation for each throw of the dice is $E[one \ throw\ of \ dice]=\frac{1+2+3+4+5+6}{6}=\frac{7}{2}$. \\
+    And from the definition of the expectation we can interpret this as meaning the roll will hit 1 in every 3.5 times. \\
+    Therefore, the probability of $p_n=\frac{1}{3.5}=\frac{2}{7}$ when n converging to infinity.
+  
+\end{enumerate}
+\end{homeworkProblem}
+\begin{homeworkProblem}[4]
+\solution
+    \begin{enumerate}[(a)]
+        \item 
+        $p_{i,j}=\frac{n-j+1}{n}p_{i-1,j-1}+\frac{j}{n}p_{i-1,j}$ for $i>=2$ and $1<=j<=n$.\\
+        Also for the purpose of explanation in b we define other cases here:\\
+        First, $p_{i,j}=0$ for $j>i$.\\
+        Second, $p_{i,j}=0$ for $j=0$ or $i=0$.\\
+        Third, $p_{1,1}=1$.\\
+    \end{enumerate}
+    \begin{enumerate}[(b)]
+        \item From the recursive equation and the definition, we can calculate $p_{i,j}$ by considering $p_{i,j}$ as a matrix, in which i is the column and j is row.\\
+        At the beginning, we can calculate $p_{i,1}$ firstly for $i>=2$, because $p_{i,0}=0$. \\
+        Therefore, we can use $p_{1,1}$ to column-by-column calculate $p_{i,1}$ for $i>=2$ by recursive equation.\\
+        Secondly, we can use $p_{i,1}$ for $i>=2$ which we have calculated and $p_{1,2}=0$ to column-by-column calculate $p_{i,2}$ for $i>=2$ by recursive equation.\\
+        $\cdots$\\
+        Finally, we can step by step to calculate the jth row, and get $p_{i,j}$ similarly for $i>=2$.\\
+        So we can get it by calculating layer-by-layer.
+      
+    \end{enumerate}
+\end{homeworkProblem}
+\begin{homeworkProblem}[5]
+\solution
+    \begin{enumerate}[(a)]
+        \item $p_k=p*p_{k-1}+q*p_{k+1}$ for all $k>=0$. And for $p_0$, because we must start at the original point, then $p_0=1$.
+      
+    \end{enumerate}
+    \begin{enumerate}[(b)]
+        \item First we can simplify the recursive equation to obtain the isoperimetric series, that is\\
+        $\frac{p}{q}=\frac{p_{k+1}-p_k}{p_k-p_{k-1}}$, and we can assume $\alpha_k=\frac{p}{q}\alpha_{k-1}$.\\
+        We can express $p_k$ by summing the equiprobable series as $p_k-p_0=\frac{(p_1-p_0)*(1-(\frac{p}{q})^k)}{1-\frac{p}{q}}$.\\
+        So what we need to get is just $p_1$.\\
+        Because if we finally reach 1 and assume one process has been finished, and then we start another process to reach k. Therefore through this way we can also get $p_k$, by considering the new original point as 1 not 0.
+        So we have a new formula $p_k=p_1*p_{k-1}$. And then we can have $p_k=p_1^k$.\\
+        And then we can calculate $p_1$, through the formula and the recursive equation, and we have $p_1=p_0*p+p_2*q=p+p_1^2q$.\\
+        And then we have one equation about $p_1$, that is $p_1^2q-p_1+p$. And then we can use the root formula $p_{1,1or2}=\frac{1\pm \sqrt[2]{1-4pq}}{2q}$.\\
+        And then we can simplify it as $p_{1,1or2}=\frac{1\pm \left\lvert 2p-1\right\rvert }{2q}$.\\
+        For $p=0.5$, $p_{1,1or2}=1$, and then $p_1=1$. So $p_k=1$.\\
+        For $p>0.5$, and because $0<=p_1<=1$, we have $p_1=1$. So $p_k=1$.\\
+        For $p<0.5$, and because $0<=p_1<=1$, we have $p_1=\frac{p}{q}$ or $p_1=1$. So when $p_1=1$, $p_k=1$. And for another case, $p_k=(\frac{p}{q})^k$. \\
+
+      
+    \end{enumerate}
+\end{homeworkProblem}    
+\end{document}

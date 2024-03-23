@@ -1,0 +1,264 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%  
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Class
+%   - Due date
+%   - Name
+%   - Student ID
+
+\newcommand{\hmwkTitle}{Homework\ \#07}
+\newcommand{\hmwkClass}{Probability \& Statistics for EECS}
+\newcommand{\hmwkDueDate}{April 02, 2023}
+\newcommand{\hmwkAuthorName}{Wang Yunfei}
+\newcommand{\hmwkAuthorID}{2021533135}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\\  \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 23:59}\\
+	\vspace{4in}
+}
+
+\author{
+	Name: \textbf{\hmwkAuthorName} \\
+	Student ID: \hmwkAuthorID}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[1]
+\solution
+\begin{enumerate}[(a)]
+    \item
+    First check whether it is valid:\\
+    (1)increasing:$F'(x)=\frac{1}{\pi\sqrt[2]{x}\sqrt[2]{1-x}}$, and $1<x<0$, so $F'(x)>0$. Therefore, F is monotone increasing.\\
+    (2)right-continuous: Because $argsinx$ is continuous when $0<x<1$ without doubts, then so do $F(x)$.\\
+    (3)limit: when x is $0^+$, $F(x)\approx\frac{2}{\pi}x$, then $F(0^+)=0$.\\
+    and when x is $1^-$, $F(x)=\frac{2}{\pi}\frac{\pi}{2}=1$. Therefore it satisfies the limitation.\\
+    And then $f(x)=\frac{1}{\pi\sqrt[2]{x}\sqrt[2]{1-x}}$ for $0<x<1$. Otherwise 0.\\
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    That is because PDF means Probability desity function, and when we want to calculate the probability of any concrete point, it is equal to 0 anyway. 
+    Therefore, even though f(x) goes to $\infty$ as x approaches 0 or 1, it doesnot matter, because it is just one point. It is still possible for us to calculate the area of the PDF and let it be equal to 1.
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[2]
+
+\begin{enumerate}[a]
+    \item
+    Because F is a CDF which is continuous and strictly increasing, then we can let $U\sim Unif(0,1)$, and $X=F^{-1}(U)$.\\
+    And the meantime, $F(X)=F(F^{-1}(U))=U$, so we can have $u=F(x)$.\\
+    And what we want is the area under the curve of the quantile function from 0 to 1.\\
+    So $\int_{0}^{1} F^{-1}(u) \,du =\int_{-\infty}^{\infty} F^{-1}(F(x)) \,dF(x) =\int_{-\infty}^{\infty} xf(x) \,dx=\mu $.\\
+    Therefore we get it.
+\end{enumerate}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[3]
+    \solution
+    \begin{enumerate}[(a)]
+        \item
+        First for $U_i$, $1<=i<=n$, they are i.i.d. $Unif(0,1)$, then we can have:
+        \begin{align*}
+            P(X<x)&=P(X<=x)\\
+                  &=P(max(U_1,\cdots,U_n)<=x)\\
+                  &=P(U_1<=x,\cdots,U_n<=x)\\
+        Because\ they\ are\ independent\\
+                  &=P(U_1<=x)\cdots P(U_n<=x)\\
+                  &=\frac{x-0}{1}\cdots \frac{x-0}{1}\\
+                  &=x^n\\
+        \end{align*}
+        So because we have got $CDF$ of $X$, then $PDF$ of $X$ is $nx^{n-1}$, when $0<x<1$. Otherwise is 0.\\
+        At the same time 
+        \begin{align*}
+            E[X]&=\int_{0}^{1}x*n*x^{n-1}  \,dx\\
+                &=n\int_{0}^{1}x^{n}  \,dx\\
+                &=\frac{n}{n+1}\\
+        \end{align*}
+    \end{enumerate}
+\end{homeworkProblem}
+\begin{homeworkProblem}[4]
+    \solution
+        \begin{enumerate}[(a)]
+            \item
+            Obviously, $X+Y=1$, so we can have $R=\frac{X}{Y}=\frac{X}{1-X}$. And we also have the support of $R$ is $(0,1)$\\
+            Then for $F(R)=P(R<=x)=P(\frac{X}{1-X}<=x)=P(X<=\frac{x}{1+x})$, and $0<=x<=1$.\\
+            And for X, we have $P(X<=x)=2x$ for $0<=x<=0.5$.\\
+            Therefore, we can have $P(R<=x)=\frac{2x}{1+x}$, for $0<=x<=1$.\\
+            And then, we can also get PDF of R, that is $f(R)=F'(R)=\frac{2}{(1+x)^2}$, for $0<=x<=1$.\\
+        \end{enumerate}
+        \begin{enumerate}[(b)]
+            \item
+          $E[R]=\int_{0}^{1}x\frac{2}{(1+x)^2}  \,dx =2ln2-1$.
+        \end{enumerate}
+        \begin{enumerate}[(c)]
+            \item
+          $E[\frac{1}{R}]=\int_{0}^{1}\frac{2}{x(1+x)^2}  \,dx =\infty$.
+        \end{enumerate}
+    \end{homeworkProblem}
+\begin{homeworkProblem}[5]
+\solution
+\begin{enumerate}[(a)]
+            \item
+            $T=G\varDelta t$.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+    \begin{align*}
+        P(T>=t)&=P(G\varDelta t>=t)\\
+                &=P(G>=\frac{t}{\varDelta t})\\
+                &=P(G>=\left\lfloor \frac{t}{\varDelta t}\right\rfloor)\\
+                &=(1-\lambda \varDelta t)^{\left\lfloor \frac{t}{\varDelta t}\right\rfloor}\\
+    \end{align*}
+    Therefore, the CDF of T is $1-(1-\lambda \varDelta t)^{\left\lfloor \frac{t}{\varDelta t}\right\rfloor}$.\\
+\end{enumerate}
+\begin{enumerate}[(c)]
+    \item 
+        \begin{align*}
+            1-(1-\lambda \varDelta t)^{\left\lfloor \frac{t}{\varDelta t}\right\rfloor}&=\lim_{ \varDelta t\to 0} 1-(1-\lambda \varDelta t)^{\left\lfloor \frac{t}{\varDelta t}\right\rfloor}\\
+                                                                                       &=1-\lim_{ \varDelta t\to 0}(1-\lambda \varDelta t)^{ \frac{t}{\varDelta t}}\\
+                                                                                       &=1-\lim_{ \varDelta t\to 0} (1-\lambda \varDelta t)^{ \frac{\lambda t}{\lambda \varDelta t}}\\
+                                                                                       &=1-(\frac{1}{e})^{\lambda t}\\
+                                                                                       &=1-e^{-\lambda t}\\
+        \end{align*}
+       Therefore, the CDF of T converges to the Expo($\lambda$) CDF. 
+\end{enumerate}
+\end{homeworkProblem}    
+\begin{homeworkProblem}[6]
+        \solution
+        \begin{enumerate}[(a)]
+            \item
+            For $E[max(Z-c,0)]$,
+            \begin{align*}
+                E[max(Z-c,0)]&=\int_{-\infty}^{c}0  \,dz +\int_{c}^{\infty}(z-c)\varphi(z)  \,dz \\
+                             &=0+\int_{-\infty}^{-c}-z\varphi(z)  \,dz-c\int_{c}^{\infty}\varphi(z)  \,dz \\
+                             &=\varphi(-c)-\varphi(-\infty)-c(1-\Phi(c))\\
+                Because\ of\ the\ symmetry\ of\ PDF\\
+                             &=\varphi(c)-0-c(1-\Phi(c))\\
+                             &=\varphi(c)-c(1-\Phi(c))\\
+            \end{align*}
+        \end{enumerate}
+    \end{homeworkProblem}
+\end{document}

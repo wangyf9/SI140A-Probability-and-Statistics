@@ -1,0 +1,261 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%  
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Class
+%   - Due date
+%   - Name
+%   - Student ID
+
+\newcommand{\hmwkTitle}{Homework\ \#04}
+\newcommand{\hmwkClass}{Probability \& Statistics for EECS}
+\newcommand{\hmwkDueDate}{March 12, 2023}
+\newcommand{\hmwkAuthorName}{Wang Yunfei}
+\newcommand{\hmwkAuthorID}{2021533135}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\\  \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 23:59}\\
+	\vspace{4in}
+}
+
+\author{
+	Name: \textbf{\hmwkAuthorName} \\
+	Student ID: \hmwkAuthorID}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[1]
+    \solution
+        \begin{enumerate}[a]
+            \item First assume that event A is that Monty open door 2, and event B is that Monty open door 3. \\
+            And $P(A)=p,P(B)=(1-p)$.\\
+            Event $D_i$ is that car is behind the $i$ door, which is denoted by $P(D_i)=\frac{1}{3}$ and  $i\in1,2,3$.\\
+            Event C is that I win the game after switching, which is denoted by $P(C)$.\\
+            And from the question, the door we open at the beginning is door 1.
+            So $P(C)=\sum_{i=1}^{3}P(C|D_i)P(D_i)$. Therefore, if car is behind door 1, we cannot win, so $P(C|D_1)=0$.
+            And if car is behind door 2 or door 3, no matter which door Monty openes, we must win if we switch, so $P(C|D_2)=P(C|D_3)=1$.\\
+            Finally, $P(C)=0*1/3+1*1/3+1*1/3=2/3$.
+        \end{enumerate}
+        \begin{enumerate}[b]
+            \item From what we have defined and calculated in (a), then what we need to calculate is $P(C|A)$.\\
+            And from bayes formula, we have $P(C|A)=\frac{P(C,A)}{P(A)}$. And for A, there are two cases.\\
+            First is when the car behind door 3, Monty has to open door 2, that is $P(A|D_3)P(D_3)=\frac{1}{3}*1$.\\
+            Second is when the car behind door 1, Monty opens door door 2, that is $P(A|D_1)P(D_1)=\frac{1}{3}p$.\\
+            So $P(A)=P(A|D_3)P(D_3)+P(A|D_1)P(D_1)=\frac{1}{3}(p+1)$.\\
+            And for $P(C,A)$, it is equal to first case.\\
+            Therefore $P(C|A)=\frac{\frac{1}{3}}{\frac{1}{3}(p+1)}=\frac{1}{p+1}$.
+        \end{enumerate}
+        \begin{enumerate}[c]
+            \item From what we have defined and calculated in (a), then what we need to calculate is $P(C|B)$.\\
+            And from bayes formula, we have $P(C|B)=\frac{P(C,B)}{P(B)}$. And for B, there are two cases.\\
+            First is when the car behind door 2, Monty has to open door 3, that is $P(B|D_2)P(D_2)=\frac{1}{3}*1$.\\
+            Second is when the car behind door 1, Monty opens door door 3, that is $P(B|D_1)P(D_1)=\frac{1}{3}(1-p)$.\\
+            So $P(B)=P(B|D_2)P(D_2)+P(B|D_1)P(D_1)=\frac{1}{3}(2-P)$.\\
+            And for $P(C,B)$, it is equal to first case.\\
+            Therefore $P(C|B)=\frac{\frac{1}{3}}{\frac{1}{3}(2-p)}=\frac{1}{2-p}$.
+        \end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[2]
+\solution
+\begin{enumerate}[(a)]
+    \item No. From the definition of the valid PMF, we can assume that $P(X=n)=a*\frac{1}{n}$. And then we can have :\\
+    $\sum_{k=1}^{\infty}P(X=k)=a*\sum_{k=1}^{\infty}\frac{1}{k}$.\\
+    From what we have learned, we know this series diverges, so even if multiplied by the constant a, it cannot be = 1. Therefore there is no valid PMF.
+    And then we get it.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item Yes. From the definition of the valid PMF, we can assume that $P(X=n)=a*\frac{1}{n^2}$. And then we can have :\\
+    $\sum_{k=1}^{\infty}P(X=k)=a*\sum_{k=1}^{\infty}\frac{1}{k^2}$.\\
+    From what we have learned, we know this series converges to $\frac{\pi^2}{6}$. So we can let the constant a be equal to $\frac{6}{\pi^2}$. 
+    And then $\sum_{k=1}^{\infty}P(X=k)$ is equal to 1. Therefore there is a valid PMF. Finally we get it.
+  
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[3]
+\solution
+\begin{enumerate}[(a)]
+    \item X and Y have the same distribution. For X we can easily get X is a discrete uniform distribution. We can denote it as $X\sim DUnif(1,2,3,4,5,6,7)$.
+    So $P(X=i)=\frac{1}{7}$ for every $1<=i<=7$. And from the question we can know Y is the next day after X. So if X=1 then Y=2. If X=2 then Y=3 $\cdots$ If X=7 then Y=1. At the same time, Both of them have the same probability at this moment.
+    Therefore for Y, we have $P(Y=i)=\frac{1}{7}$ for every $1<=i<=7$. So Y is distributed as $Y\sim DUnif(1,2,3,4,5,6,7)$. Then X and Y has the same distribution.\\
+    For $P(X<Y)$, there is just one case $X>Y$, that is $X=7$ and $Y=1$. Therefore, $P(X<Y)=1-P(X>=Y)=1-\frac{1}{7}=\frac{6}{7}$.
+\end{enumerate}
+\end{homeworkProblem}
+\begin{homeworkProblem}[4]
+\solution
+    \begin{enumerate}[(a)]
+        \item For the new r.v. X, we choose two coins randomly and the probability is 0.5. At the same time, the probability of first one landing head is $p_1$, and another one is $p_2$. \\
+        So, PMF of X is $P(X=k)=1/2\binom{n}{k}p_1^k(1-p_1)^{n-k}+1/2\binom{n}{k}p_2^k(1-p_2)^{n-k}$ for $0<=k<=n$.\\
+
+    \end{enumerate}
+    \begin{enumerate}[(b)]
+        \item Because PMF of X and $p_1=p_2$, then we have PMF of X is  $P(X=k)=\binom{n}{k}p_1^k(1-p_1)^{n-k}$. And this is obviously the binomial distribution.
+        And it can be denoted by $X\sim Bin(n,p_1)$.
+    \end{enumerate}
+    \begin{enumerate}[(c)]
+        \item For $p_1\neq p_2$, if we choose different coin then the left part and the right part of the formula would not be equal, because the probability of landing heads are different, then we cannot seem it as binomial distribution after adding up.
+    \end{enumerate}
+\end{homeworkProblem}
+\begin{homeworkProblem}[5]
+\solution
+    \begin{enumerate}[(a)]
+        \item 
+        $X\oplus Y$ is distributed as Bernoulli distribution. \\
+        That is because when $X=Y$, $X\oplus Y=0$, that is $P(X=Y)=P(X=Y=1)+P(X=Y=0)=\frac{1}{2}p+\frac{1}{2}(1-p)=1/2$.\\
+        And when $X\neq Y$, $X\oplus Y=1$, that is $P(X\neq Y)=P(X=0,Y=1)+P(X=1,Y=0)=\frac{1}{2}p+\frac{1}{2}(1-p)=1/2$.\\
+        Therefore it is obviously the Bernoulli distribution.
+      
+    \end{enumerate}
+    \begin{enumerate}[(b)]
+        \item First $P(X\oplus Y|X)=\frac{P(X\oplus Y,X)}{P(X)}$.\\
+        So let we consider it at X=1 and $X\oplus Y=1$.\\
+        $P(X\oplus Y=1|X=1)=\frac{P(X\oplus Y=1,X=1)}{P(X=1)}=\frac{P(Y=0,X=1)}{P(X=1)}=\frac{\frac{1}{2}p}{p}=\frac{1}{2}$.\\
+        Then $X\oplus Y$ is independent of X.
+        Second, $P(X\oplus Y|Y)=\frac{P(X\oplus Y,Y)}{P(Y)}$.\\
+        So let we consider it at $X\oplus Y=1$ and Y=1.\\
+        $P(X\oplus Y=1|Y=1)=\frac{P(X\oplus Y=1,Y=1)}{P(Y=1)}=\frac{P(Y=1,X=0)}{P(Y=1)}=\frac{\frac{1}{2}(1-p)}{\frac{1}{2}}=1-p$.\\
+        Then if $p=\frac{1}{2}$, then $X\oplus Y$ is independent of Y. Otherwise it is not.
+    \end{enumerate}
+    \begin{enumerate}[(c)]
+        \item  First we need to consider about $Y_J\sim Bern(1/2)$, and $Y_J=\bigoplus_{j\in J}X_j$ and $X_j\sim Bern(1/2)$ for $j\in \{1,2,\cdots,n\}$ .\\
+        When J=1, obviously $X_1=Y_1\sim Bern(1/2)$.\\
+        Then we can assume that when $J=k$, we have $Y_k=\bigoplus_{j=1}^kX_j\sim Bern(1/2)$.\\
+        Then when $J=k+1$, we have $P(Y_{k+1})=P((\bigoplus_{j=1}^kX_j)\oplus X_{k+1}=1)=P(\bigoplus_{j=1}^kX_j=0,X_{k+1}=1)+P(\bigoplus_{j=1}^kX_j=1,X_{k+1}=0)$.\\
+        Therefore $P(Y_{k+1})=\frac{1}{2}*\frac{1}{2}+\frac{1}{2}*\frac{1}{2}=\frac{1}{2}$ from we have known.\\
+        Then we get $Y_{k+1}\sim Bern(1/2)$.\\
+        Finally, we can get $Y_{J}\sim Bern(1/2)$ for $J>=1$.\\
+        Second, choose two subsets of Y, and they are disjoint and unempty, denoted as M and N.\\
+        $P(Y_M=1,Y_N=1)=P(Y_a\bigoplus Y_b=1,Y_a\bigoplus Y_c=1)$\\
+        $=0.5P(Y_a\bigoplus Y_b=1,Y_a\bigoplus Y_c=1|Y_a=1)+0.5P(Y_a\bigoplus Y_b=1,Y_a\bigoplus Y_c=1|Y_a=0)$.\\
+        $=0.5P(Y_b=0,Y_c=0|Y_a=1)+0.5P(Y_b=1,Y_c=1|Y_a=1)=0.5*0.5*0.5+0.5*0.5*0.5=0.5*0.5=\frac{1}{4}=P(Y_M=1)P(Y_N=1)$.\\
+        Therefore, we can get $2^n-1 R.V.s$ are pairwise independent.
+        Third, choose three subsets called $x_1,x_2,x_3$, and $x_1,x_2$ are disjoint and $x_3=x_1\cup x_2$. And from the definition, we can get $Y_1,Y_2,Y_3$.\\
+        Then we have $P(Y_1=1,Y_2=1,Y_3=1)=1/4$, but $P(Y_1=1)P(Y_2=1)P(Y_3=1)=1/8$. \\
+        Therefore they are not independent.
+
+        
+    \end{enumerate}
+\end{homeworkProblem}    
+\end{document}

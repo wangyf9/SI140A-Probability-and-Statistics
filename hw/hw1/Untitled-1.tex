@@ -1,0 +1,286 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{amsmath, amssymb}
+\usepackage{lipsum}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%  
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass : \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Class
+%   - Due date
+%   - Name
+%   - Student ID
+
+\newcommand{\hmwkTitle}{Homework\ \#01}
+\newcommand{\hmwkClass}{Probability \& Statistics for EECS}
+\newcommand{\hmwkDueDate}{Feb 19, 2023}
+\newcommand{\hmwkAuthorName}{Wang Yunfei}
+\newcommand{\hmwkAuthorID}{2021533135}
+
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\\  \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 23:59}\\
+	\vspace{4in}
+}
+
+\author{
+	Name: \textbf{\hmwkAuthorName} \\
+	Student ID: \hmwkAuthorID}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}[1]
+\solution
+\begin{enumerate}[(a)]
+    \item
+We can use story proof to prove it. The left side can be seen as we divide n+1 person into k groups.
+And we have $\begin{Bmatrix}n+1\\{k}\end{Bmatrix}$. And the right side can be seen as two different situations, namely whether I'm in a group by myself or I'm not.
+So for the first case I am in a group by myself, so we just need to divide n person into k-1 groups so we have $\begin{Bmatrix}n\\{k-1}\end{Bmatrix}$. And for the second situation,
+we divide n person into k groups first and then put myself into one of the k groups, so we have $k*\begin{Bmatrix}n\\{k}\end{Bmatrix}$, because we have k choices to put myself in one group.
+Therefore, we can divide n+1 person into k groups in another way, by adding up the results for these two cases, and then we can get the proof, namely $\begin{Bmatrix}n+1\\{k}\end{Bmatrix}=k*\begin{Bmatrix}n\\{k}\end{Bmatrix}+\begin{Bmatrix}n\\{k-1}\end{Bmatrix}$.
+\end{enumerate}
+\begin{enumerate}[(b)]
+    \item
+We can use story proof to prove that. The right side can be seen as divide n+1 person into k+1 groups, that is $\begin{Bmatrix}n+1\\{k+1}\end{Bmatrix}$. 
+The left side can be thought of how many people are not going to be in my group, including myself. So the number of people who are not going to be in my group is in the range k to n. So first step we determine how many people are not in my group and then the second step to divide the number of these people into k groups because we already have one group.
+So the final result of the left side is equal to $\sum_{j=k}^n\binom{n}{j}\begin{Bmatrix}j\\{k}\end{Bmatrix}$, and through this way we can also divide n+1 person into k+1 groups. So we can prove that  $\begin{Bmatrix}n+1\\{k+1}\end{Bmatrix}=\sum_{j=k}^n\binom{n}{j}\begin{Bmatrix}j\\{k}\end{Bmatrix}$.
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[2]
+
+\begin{enumerate}
+    \item
+First The Taylor expansion of $e^x$ is $1+x+x^2/{2!}+\cdots+x^n/{n!}$, so we can let x=1 and then we can get $e=1+1/{1!}+1/{2!}+\cdots+1/{n!}$.
+Second let us simplify the question, it is just an ordered sampling without replacement so that we can avoid the repetition. And when we use one letter, we can get $26=26!/25!$, and if we use two letters, we can get $26*25=26!/24!$ ,$\cdots$,
+and if we use 26 letters, we can have $26*25*\cdots*1=26!/1!$. So if we add up them, we can get $26!/25!+26!/24!+\cdots+26!/1!$. And use all 26 letters under the requirement is $26!$. And then we can get the result: $\frac{26!}{26!/25!+26!/24!+\cdots+26!/1!}=\frac{1}{1/25!+1/24!+\cdots+1/1!}$ and it is similar with the expansion of e as well as n=26 so at this time it is very close to 1/e.
+Therefore, the probability that it uses all 26 letters is very close to 1/e.
+\end{enumerate}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[3]
+    \solution
+    \begin{enumerate}[(a)]
+        \item
+    There are 8400 different curricula which are possible. We can choose there higher level courses from\\\
+    $\{H1,H2,\cdots H10\}$ randomly and equally likely without putting back.
+    Because what we need is unordered so this step is $\binom{10}{3}$. And then we choose four lower level courses from$\{L1,L2,\cdots L8\}$ randomly and equally likely without putting back.
+    Similarly this step is $\binom{8}{4}$. Therefore the final result is $\binom{10}{3}*\binom{8}{4}=120*70=8400$.
+    \end{enumerate}
+    \begin{enumerate}[(b)]
+        \item
+    First we can spilt all situations into six pieces A1,A2,A3,A4,A5,A6. A1 presents have L1 but not have L2, L3. A2 presents have L2, L3 but not have L1.\\
+    A3 have L1, L2, L3. A4 does not have L1, L2, L3. A5 have L1, L2 but not L3. A6 have L1, L3 but not L2. \\
+    So we just have to calculate the number of different curricula for each of the six cases.\\
+    A1 we need to choose another three courses from the remaining five courses so it is $\binom{5}{3}$, \\
+    and then we can choose three higher level courses from $\{H1,H2,\cdots H5\}$, which is also $\binom{5}{3}$.\\
+    So final result is equal to $1*\binom{5}{3}*\binom{5}{3}=100$.\\
+    And A2 we need to choose another two courses from the remaining five courses so it is $\binom{5}{2}$, \\
+    and then we can choose three higher level courses from $\{H6,H7,\cdots H10\}$, which is $\binom{5}{3}$.\\
+    So final result is equal to $1*1*\binom{5}{2}*\binom{5}{3}=100$.\\
+    And A3 we need to choose another one courses from the remaining five courses so it is $\binom{5}{1}$, \\
+    and then we can choose three higher level courses from $\{H1,H2,\cdots H10\}$, which is also $\binom{10}{3}$.\\
+    So final result is equal to $1*1*1*\binom{5}{1}*\binom{10}{3}=5*120=600$.\\
+    And for A4 because we do not choose any course among L1 and L2 and L3, so we can not choose any higer level courses. \\
+    Therefore the result is 0.\\
+    And for A5 and A6 because we all choose L1 but one of L2 and L3, so we can choose another two courses from the remaining five courses so it is $\binom{5}{2}$,\\
+     and then we can choose three higher level courses from $\{H1,H2,\cdots H5\}$,\\
+     which is $\binom{5}{3}$. So final result is equal to $2*1*1*\binom{5}{2}*\binom{5}{3}=200$ for A5+A6.\\
+    Therefore there are 1000 different curricula in total.\\
+    \end{enumerate}
+    \end{homeworkProblem}
+    \begin{homeworkProblem}[4]
+    \solution
+        \begin{enumerate}[(a)]
+            \item
+        The complement of the event we want to calculate is there is no birthday match, \\
+        namely $P(at \quad least \quad one \quad birthday \quad match)=1-P(no \quad birthday \quad match)$. 
+        First if $k>=366$, then $P(no \quad birthday \quad match)=0$,and then what we want is equal to 1.
+        Second if $2<=k<=365$, then we first choose k days and then assign the k birthdays to k people.
+        So for each one case, it is $k!*pk1pk2\cdots pkk$, therefore, finally $P(no \quad birthday \quad match)=k!*e_k(P)$, 
+        in which P is the set of the probability of each day. All in all, $P(at \quad least \quad one \quad birthday \quad match)=1-k!*e_k(P)$. 
+        \end{enumerate}
+        \begin{enumerate}[(b)]
+            \item
+        (1)extreme case: we can assume the probability of birthday on February 16th is 1, \\
+        then $P(at \quad least \quad one \quad birthday \quad match)=1$\\
+        (2)simple case: we can assume the probability of birthday on days which are ten months after the Spring Festival is higher than other days, then people
+         whose birthday is these days are much more easier to match their birthday.\\
+        (3)All in all, $P(at \quad least \quad one \quad birthday \quad match)$is minimized when $p_j = 1/365$ for all j.
+        \end{enumerate}
+        \begin{enumerate}[(c)]
+            \item
+        First, from the right side, we can divide the left side into four parts:\\
+        (1)have x1, not have x2, that is $x_1\sum_{3<=j1<j2<\cdots<j_{k-1}<=n}x_{j1}x_{j2}\cdots x_{j_{k-1}}=x_1e_{k-1}(x_3,\cdots,x_n)$\\
+        (2)have x2, not have x1, that is $x_2\sum_{3<=j1<j2<\cdots<j_{k-1}<=n}x_{j1}x_{j2}\cdots x_{j_{k-1}}=x_2e_{k-1}(x_3,\cdots,x_n)$\\
+        (3)have x1 and x2,that is $x_1x_2\sum_{3<=j1<j2<\cdots<j_{k-2}<=n}x_{j1}x_{j2}\cdots x_{j_{k-2}=x_1x_2e_{k-2}(x_3,\cdots,x_n)}$\\
+        (4)not have x1 and x2, that is $\sum_{3<=j1<j2<\cdots<j_{k}<=n}x_{j1}x_{j2}\cdots x_{j_k}=e_k(x_3,\cdots,x_n)$\\
+        (5)Therefore, add up four cases above, then we have $(x_1+x_2)e_{k-1}(x_3,\cdots,x_n)+x_1x_2e_{k-2}(x_3,\cdots,x_n)+e_k(x_3,\cdots,x_n)$\\
+        Finally, we prove it.\\
+        Second, from question(a), we can have $P(at \quad least \quad one \quad birthday \quad match| P)=1-k!e_k(P)$\\
+        and $P(at \quad least \quad one \quad birthday \quad match| r)=1-k!e_k(r)$. \\
+        Then 
+        \begin{equation}
+        \begin{aligned}
+        & P(at \ least \  one \  birthday \  match| P)-P(at \ least \  one \  birthday \  match| r)\\
+        & =1-k!e_k(P)-(1-k!e_k(r))\\
+        & =k!(e_k(r)-e_k(P))\\
+        & =k!\{[(r_1+r_2)-(p_1+p_2)]e_{k-1}(p_3,\cdots,p_n)+(r_1r_2-p_1p_2)e_{k-2}(p_3,\cdots,p_n)+0\}\\
+        & =k!\{0+[\frac{(p1+p2)^2}{4}-p_1p_2]e_{k-1}(p_3,\cdots,p_n)\}\\
+        & \geq k![(\sqrt[2]{p1p2})^2-p_1p_2]e_{k-1}(p_3,\cdots,p_n)= 0\\
+        \end{aligned}
+        \end{equation}
+        When $p_1$ is equal to $p_2$, the equality sign is true and we prove it.
+        Third, from the second step, we can randomly select two days i and j $1<=i<j<=365$,\\
+        and under the condition P(at \ least \  one \  birthday \  match| P)=P(at \ least \  one \  birthday \  match| r)\\
+        so we can have $p_i=p_j$. Therefore, because the days we select are random, \\
+        so we can repeat this step many times until we have $p_i=p_j$ for all i and j $1<=i<j<=365$. \\
+        So when $p_j=\frac{1}{365}$ for all $1<=j<=365$, this will be minimized and we prove it.
+        \end{enumerate}
+    \end{homeworkProblem}
+    \begin{homeworkProblem}[5]
+    \solution
+        \begin{enumerate}[(a)]
+            \item
+        The right side can be seen as choose two person as a team from n+1 person, that is $\binom{n+1}{2}$.
+        For the left side, we can firstly flag n+1 person from 0 to n. And then assume event Ai:the team we select has two person and their latter id is i. And then we can assume event A: the team we select has two person without other limitation.
+        So event A presents the right side and A=A1+A2+$\cdots$+An+1. For A1, we can only choose the two person whose id are 0 and 1, so it is equal to 1, and for A2, we can choose 0,2 and 1,2, that is two cases in total$\cdots$, and finally for An, we can choose 0,n and 1,n $\cdots$ and then n-1,n, that is n cases in total.
+        Therefore we add up A1, A2, $\cdots$and An=1+2+$\cdots$+n. In the end, we get the prove: $1+2+\cdots+n=\binom{n+1}{2}$.
+        and we can use basic algebra to check that the square of the right-hand side in (a) is the right-hand side in (b).
+        \end{enumerate}
+        \begin{enumerate}[(b)]
+            \item
+        The left side can be seen as we first choose one number named k in range${1,2,\cdots,n,n+1}$ randomly, \\
+        and then choose three numbers from the new range$1,\cdots,k-1$ with replacement. So when k=1, the case is 0. When k=2, three numbers are all equal to 1, so just have one case.$\cdots$\\
+        When k=n+1, these three numbers can choose from ${1,\cdots,n}$ independently because with the replacement, so we have $n^3$ cases.
+        Therefore the left side is equal to $0^3+1^3+2^3+\cdots+n^3=1^3+2^3+\cdots+n^3$ .\\
+        In another way, the right side can be seen as we choose four numbers in the range ${1,2,\cdots,n,n+1}$, and from the way of the left side, we can divide the right side into different cases:\\
+        (1)without repetition: we first choose four numbers out of order and without replacement, that is $\binom{n+1}{4}$and then pick the max number to simulate k and \\
+        for other three numbers we make them in order and we have $1*3*2*1=6$ ways.\\
+        so we have $6*\binom{n+1}{4}$ different ways.\\
+        (2)have one repetition: so we just need to choose three numbers, that is $\binom{n+1}{3}$, we also choose the biggest one as k, and then for the remaining three numbers we also have 6 ways to arrange them\\
+        so we also have $6*\binom{n+1}{3}$ different ways in total.\\
+        (3)have two repetition:so we just need to choose two numbers, that is $\binom{n+1}{2}$, and then we choose the bigger one as k, and the smaller one is exactlt equal to the value of remaining three numbers\\
+        so we have $1*\binom{n+1}{2}$ ways in total.\\
+        Finally, the right side = $6*\binom{n+1}{4}+6*\binom{n+1}{3}+1*\binom{n+1}{2}$, so we prove it.\\
+        And we can use basic algebra to check that the square of the right-hand side in (a) is the right-hand side in (b).
+        \end{enumerate}
+    \end{homeworkProblem}    
+\end{document}
