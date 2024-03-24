@@ -1,5 +1,5 @@
 # SI140A - Probability - and - Statistics
-This repository contains [assignments](https://github.com/wangyf9/SI140A-Probability-and-Statistics/tree/main/hw), [course project](), [handwritten notes](https://github.com/wangyf9/SI140A-Probability-and-Statistics/tree/main/ppt_spring) from the professor, and [related practice problems](https://github.com/wangyf9/SI140A-Probability-and-Statistics/blob/main/ans-Joseph.pdf) for SI140A, spring, 2023 in Shanghaitech.
+This repository contains [assignments](https://github.com/wangyf9/SI140A-Probability-and-Statistics/tree/main/hw), [course project](https://github.com/wangyf9/SI140A-Probability-and-Statistics/tree/main/Final%20project), [handwritten notes](https://github.com/wangyf9/SI140A-Probability-and-Statistics/tree/main/ppt_spring) from the professor, and [related practice problems](https://github.com/wangyf9/SI140A-Probability-and-Statistics/blob/main/ans-Joseph.pdf) for SI140A, spring, 2023 in Shanghaitech.
 
 ## Course outline
 - **Lecture 1** 
