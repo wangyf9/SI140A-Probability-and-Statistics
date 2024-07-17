@@ -2,16 +2,17 @@
 This repository contains [assignments](https://github.com/wangyf9/SI140A-Probability-and-Statistics/tree/main/hw), [course project](https://github.com/wangyf9/SI140A-Probability-and-Statistics/tree/main/Final%20project), [handwritten notes](https://github.com/wangyf9/SI140A-Probability-and-Statistics/tree/main/ppt_spring) from the professor, and [related practice problems](https://github.com/wangyf9/SI140A-Probability-and-Statistics/blob/main/ans-Joseph.pdf) for SI140A, spring, 2023 in Shanghaitech.
 
 ## Course outline
-- **Lecture 1** 
+
+- **Lecture 1**
   - Probability and Counting
 - **Lecture 2**
   - Conditional Probability
-- **Lecture 3** 
-  -  Random Variables
-- **Lecture 4** 
+- **Lecture 3**
+  - Random Variables
+- **Lecture 4**
   - Expectation
 - **Lecture 5**
-  -  Continuous Random Variables
+  - Continuous Random Variables
 - **Lecture 6**
   - Joint Distributions
 - **Lecture 7**
@@ -22,8 +23,11 @@ This repository contains [assignments](https://github.com/wangyf9/SI140A-Probabi
   - Statistical Inference
   
 ## Course Project
-  1.  **Multi-Armed Bandit Algorithms**
-    - Part I: Basic Bandits
-    - Part II: Bayesian Bandits
-  2. **Monte Carlo Tree Search**
-    - Part III: MCTS Implementation
+
+![bandit](/Final%20project/Bandit%20project/figures/bandit.png)
+
+1. **Multi-Armed Bandit Algorithms**
+  - Part I: Basic Bandits
+  - Part II: Bayesian Bandits
+2. **Monte Carlo Tree Search**
+  - Part III: MCTS Implementation
